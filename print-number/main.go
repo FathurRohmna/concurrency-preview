@@ -23,8 +23,9 @@ func printLetters() {
 
 func main() {
 	// Run printNumbers and printLetters concurrently
-	go printNumbers()
+	go printNumbers()   
 	go printLetters()
 
+	// Set time.Sleep to prevent the program exit before the goroutines complete their task
 	time.Sleep(10 * time.Second)
 }
