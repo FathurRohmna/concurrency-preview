@@ -27,7 +27,7 @@ func main() {
 
 	// Buffered: Transaction processes can be performed simultaneously according to the set capacity
 	// Unbuffered: Transaction processes will be done one by one, waiting for each process to finish before proceeding to the next
-	result := make(chan string, 5)
+	result := make(chan string)
 
 	wg.Add(2)
 	go produce(result, &wg)
