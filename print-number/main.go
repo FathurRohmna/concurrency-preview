@@ -27,10 +27,13 @@ func printLetters(wg *sync.WaitGroup) {
 func main() {
 	var wg sync.WaitGroup
 
-	wg.Add(2)
+	wg.Add(1)
 
 	// Run printNumbers and printLetters concurrently
 	go printNumbers(&wg)
+	wg.Wait()
+
+	wg.Add(1)
 	go printLetters(&wg)
 
 	// // Set time.Sleep to prevent the program exit before the goroutines complete their task
