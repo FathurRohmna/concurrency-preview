@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -22,10 +23,23 @@ func printLetters() {
 }
 
 func main() {
-	// Run printNumbers and printLetters concurrently
-	go printNumbers()   
-	go printLetters()
+	var wg sync.WaitGroup
 
-	// Set time.Sleep to prevent the program exit before the goroutines complete their task
-	time.Sleep(10 * time.Second)
+	// Run printNumbers and printLetters concurrently
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		printNumbers()
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		printLetters()
+	}()
+
+	// // Set time.Sleep to prevent the program exit before the goroutines complete their task
+	// time.Sleep(10 * time.Second)
+
+	wg.Wait()
 }
